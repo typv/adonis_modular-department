@@ -1,21 +1,16 @@
-import env from "#start/env";
+import { ModuleConnectionConfig } from "#common/database/database.type";
+import { DefaultDBConfig } from "#common/database/database.constant";
+import { ConnectionConfig } from "@adonisjs/lucid/types/database";
 
-const departmentsConfig = {
+const departmentsConfig: ModuleConnectionConfig = {
   connectionName: 'departments',
   connectionConfig: {
-    client: 'pg',
-    connection: {
-      host: env.get('DB_HOST'),
-      port: env.get('DB_PORT'),
-      user: env.get('DB_USER'),
-      password: env.get('DB_PASSWORD'),
-      database: env.get('DB_DATABASE'),
-    },
+    ...DefaultDBConfig,
     migrations: {
       naturalSort: true,
       paths: ['app/modules/department/database/migrations'],
     },
-  },
+  } as ConnectionConfig,
 };
 
 export default departmentsConfig;
